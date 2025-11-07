@@ -9,19 +9,19 @@ const t = useTranslations(currentLang as keyof typeof languages);
 
 const benefits = [
   {
-    body: `${t("beneficiofan1_parte1")} ${t("beneficiofan1_resaltado")} ${t("beneficiofan1_parte2")}`,
+    body: `${t("beneficioartista1_parte1")} ${t("beneficioartista1_resaltado")} ${t("beneficioartista1_parte2")}`,
     icon: "fas fa-bell",
   },
   {
-    body: `${t("beneficiofan2_parte1")}<br>${t("beneficiofan2_parte2")}`,
+    body: `${t("beneficioartista2_parte1")}<br>${t("beneficioartista2_parte2")}`,
     icon: "fas fa-envelope",
   },
   {
-    body: `${t("beneficiofan3_parte1")}<br>${t("beneficiofan3_resaltado")} ${t("beneficiofan3_parte2")}`,
+    body: `${t("beneficioartista3_parte1")}<br>${t("beneficioartista3_resaltado")} ${t("beneficioartista3_parte2")}`,
     icon: "fas fa-user-friends",
   },
   {
-    body: `${t("beneficiofan4_parte1")}<br>${t("beneficiofan4_parte2")}`,
+    body: `${t("beneficioartista4_parte1")}<br>${t("beneficioartista4_parte2")}`,
     icon: "fas fa-map",
   },
 ];
@@ -31,7 +31,7 @@ const benefits = [
   <CardsContainer
     cols={2}
     cards={benefits}
-    title={`${t("titulo_beneficios_fan_parte1")} <span class="text-[#8c1c25]">${t("titulo_beneficios_fan_resaltado")}</span> ${t("titulo_beneficios_fan_parte2")}`}
+    title={`${t("titulo_beneficios_artista_parte1")} <span class="text-[#8c1c25]">${t("titulo_beneficios_artista_resaltado")}</span> ${t("titulo_beneficios_artista_parte2")}`}
     cardsBody="center"
     cardsPx={4}
   />

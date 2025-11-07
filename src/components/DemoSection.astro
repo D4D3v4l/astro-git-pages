@@ -1,0 +1,163 @@
+---
+import type { languages } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
+
+const currentLang = Astro.currentLocale || "en";
+const t = useTranslations(currentLang as keyof typeof languages);
+
+const mockups = [
+  {
+    title: "Inicio",
+    description: "Pantalla de bienvenida",
+    image: "/astro-git-pages/mockup-inicio.png",
+  },
+  {
+    title: "Iniciar Sesión",
+    description: "Acceso a tu cuenta",
+    image: `/astro-git-pages/mockup-login.png`,
+  },
+  {
+    title: "Registro",
+    description: "Crear nueva cuenta",
+    image: `/astro-git-pages/mockup-registro.png`,
+  },
+  {
+    title: "Home",
+    description: "Comunidades y conciertos cercanos",
+    image: `/astro-git-pages/mockup-home.png`,
+  },
+  {
+    title: "Descubrir Conciertos",
+    description: "Explora eventos disponibles",
+    image: `/astro-git-pages/mockup-descubrir.png`,
+  },
+  {
+    title: "Filtros",
+    description: "Busca por género, fecha y ubicación",
+    image: `/astro-git-pages/mockup-filtros.png`,
+  },
+  {
+    title: "Mapa Interactivo",
+    description: "Localiza eventos en tiempo real",
+    image: `/astro-git-pages/mockup-mapa.png`,
+  },
+  {
+    title: "Comunidades",
+    description: "Únete a grupos musicales",
+    image: `/astro-git-pages/mockup-comunidades.png`,
+  },
+  {
+    title: "Comunidad Específica",
+    description: "Vista detallada de una comunidad",
+    image: `/astro-git-pages/mockup-comunidad.png`,
+  },
+  {
+    title: "Perfil",
+    description: "Tu información personal",
+    image: `/astro-git-pages/mockup-perfil.png`,
+  },
+  {
+    title: "Editar Perfil",
+    description: "Modifica tu información personal",
+    image: "/astro-git-pages/mockup-edit.png",
+  },
+];
+---
+
+<div
+  class="p-18 relative w-full max-w-4xl mx-auto overflow-hidden rounded-2xl shadow-xl"
+>
+  <div
+    id="carousel-track"
+    class="flex transition-transform duration-700 ease-in-out"
+  >
+    {
+      mockups.map(({ image, title, description }) => (
+        <div class="w-full shrink-0 flex flex-col items-center text-center">
+          <img
+            src={image}
+            alt={title}
+            class="w-full h-80 object-contain bg-black/10"
+            loading="lazy"
+          />
+          <h3 class="text-xl font-semibold mt-4">{title}</h3>
+          <p class="text-gray-400 mb-6">{description}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <button
+    id="prev-btn"
+    class="absolute top-1/2 left-4 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white p-2 rounded-full"
+  >
+    &#10094;
+  </button>
+  <button
+    id="next-btn"
+    class="absolute top-1/2 right-4 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white p-2 rounded-full"
+  >
+    &#10095;
+  </button>
+
+  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+    {
+      mockups.map((_, i) => (
+        <div
+          class="indicator w-3 h-3 bg-gray-400 rounded-full cursor-pointer transition-all duration-300"
+          data-index={i}
+        />
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const track = document.getElementById("carousel-track");
+  const indicators = document.querySelectorAll(".indicator");
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
+
+  let index = 0;
+  const total = indicators.length;
+
+  const update = () => {
+    track!.style.transform = `translateX(-${index * 100}%)`;
+    indicators.forEach((dot, i) => {
+      dot.classList.toggle("bg-gray-200", i === index);
+      dot.classList.toggle("bg-gray-500", i !== index);
+    });
+  };
+
+  const next = () => {
+    index = (index + 1) % total;
+    update();
+  };
+
+  const prev = () => {
+    index = (index - 1 + total) % total;
+    update();
+  };
+
+  indicators.forEach((dot) => {
+    dot.addEventListener("click", (e) => {
+      const target = e.currentTarget as HTMLElement;
+      index = Number(target.dataset.index);
+      update();
+    });
+  });
+
+  prevBtn!.addEventListener("click", prev);
+  nextBtn!.addEventListener("click", next);
+
+  let autoplay = setInterval(next, 4000);
+
+  document
+    .querySelector(".relative")!
+    .addEventListener("mouseenter", () => clearInterval(autoplay));
+  document
+    .querySelector(".relative")!
+    .addEventListener("mouseleave", () => (autoplay = setInterval(next, 4000)));
+
+  update();
+</script>

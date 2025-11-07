@@ -699,9 +699,6 @@ footer {
   outline: none;
   border-color: #666;
 }
-.highlight {
-  color: #8c1c25;
-}
 .benefits {
   display: flex;
   flex-wrap: wrap;

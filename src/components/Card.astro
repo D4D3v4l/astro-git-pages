@@ -1,11 +1,11 @@
 ---
-const { img, icon, body, footer1, footer2, regular } = Astro.props;
+const { img, icon, body, footer1, footer2, regular, bodyCentered = false, px = 8 } = Astro.props;
 
 const hasImg = !!img;
 ---
 
 <div
-  class="bg-[hsl(0,0%,10%)] hover:bg-[hsl(0,0%,15%)] h-auto w-76 p-8 rounded-3xl shadow-sl overflow-hidden transition-all duration-300 hover:-translate-y-2"
+  class=`bg-[hsl(0,0%,10%)] hover:bg-[hsl(0,0%,15%)] h-auto w-76 py-8 px-${px} rounded-3xl shadow-sl overflow-hidden transition-all duration-300 hover:-translate-y-2`
 >
   {hasImg ? (
     <img
@@ -23,11 +23,7 @@ const hasImg = !!img;
     </div>
   )}
   <div>
-    <h4
-      class={`text-[hsl(0,0%,90%)] ${regular ? "mb-2" : "mb-8"}`}
-    >
-      {body}
-    <h4/>
+    <h4 class={`text-[hsl(0,0%,90%)] ${bodyCentered ? "text-center": ""} ${regular ? "mb-2" : "mb-8"}`} set:html={body} />
     <div class="text-[hsl(0,0%,70%)]">
       <p>{footer1}</p>
       <p>{footer2}</p>
