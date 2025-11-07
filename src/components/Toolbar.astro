@@ -1,0 +1,85 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import type { languages } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+
+const currentLang = Astro.currentLocale || "en";
+const t = useTranslations(currentLang as keyof typeof languages)
+
+const items = [
+  { label: "inicio" as const, to: "/" },
+  { label: "fans" as const, to: "/fans" },
+  { label: "artistas" as const, to: "/artists" },
+  { label: "demo" as const, to: "/demo" },
+];
+---
+
+<nav
+  class="fixed flex w-full justify-center p-2 bg-[#000000] z-50 text-white"
+>
+  <div class="flex w-full items-center justify-between max-w-280">
+    <img src="/logo.webp" alt="GigMap Logo" class="w-14 h-14" />
+    <div class="flex items-center">
+      <ul
+        id="nav-menu"
+        class="absolute md:static top-18 right-0 w-44 md:w-auto backdrop-blur-md flex flex-col md:flex-row md:items-center items-start transition-all duration-300 ease-in-out md:max-h-none opacity-0 md:opacity-100 max-h-0 overflow-hidden"
+      >
+        {
+          items.map((item) => (
+            <li class="py-2 md:py-0">
+              <a
+                href={getRelativeLocaleUrl(currentLang, item.to)}
+                class="mx-6 font-bold hover:text-[#8c1c25] active:text-[#8c1c25] duration-300"
+              >
+                {t(item.label)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="ml-6 mr-12 hidden md:block">|</div>
+      <LanguageSwitcher />
+      <div class="md:mr-12 mr-6"></div>
+      <button id="menu-btn" class="md:hidden focus:outline-none">
+        <svg
+          class="md:hidden"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M4 6l16 0"></path>
+          <path d="M4 12l16 0"></path>
+          <path d="M4 18l16 0"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const menuBtn = document.getElementById("menu-btn");
+  const navMenu = document.getElementById("nav-menu");
+  let open = false;
+
+  if (menuBtn && navMenu) {
+    menuBtn.addEventListener("click", () => {
+      open = !open;
+
+      if (open) {
+        navMenu.classList.add("max-h-auto", "opacity-100");
+        navMenu.classList.remove("max-h-0", "overflow-hidden", "opacity-0");
+      } else {
+        navMenu.classList.add("max-h-0", "overflow-hidden", "opacity-0");
+        navMenu.classList.remove("max-h-auto", "opacity-100");
+      }
+    });
+  }
+</script>

@@ -1,0 +1,35 @@
+---
+import Card from "./Card.astro";
+import SectionDivider from "./SectionDivider.astro";
+import SectionTitle from "./SectionTitle.astro";
+
+const { title, cards, regular = false } = Astro.props;
+---
+
+<SectionDivider />
+<section class="px-5 sm:px-10">
+  <SectionTitle title={title} />
+  <div class="flex justify-center">
+    <div
+      class={`grid gap-10 mb-15 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center
+        ${cards.length % 2 !== 0
+          ? 'md:[&>*:last-child]:col-span-2 md:[&>*:last-child]:justify-self-center lg:[&>*:last-child]:col-auto lg:[&>*:last-child]:justify-self-auto'
+          : ''}`
+      }
+    >
+      {
+        cards.map((card: any) => (
+          <Card
+            img={card.img}
+            icon={card.icon}
+            body={card.body}
+            footer1={card.footer1}
+            footer2={card.footer2}
+            regular={regular}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+

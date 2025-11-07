@@ -1,0 +1,22 @@
+---
+const pathname = Astro.url.pathname;
+const currentLang = pathname.startsWith("/es") ? "es" : "en";
+
+function translatedPath(lang: string) {
+  return lang === "en" ? "/en" : "/es";
+}
+---
+
+<a
+  href={translatedPath("en")}
+  class={`${currentLang === "en" ? "bg-[hsl(0,0%,15%)]" : "bg-[hsl(0,0%,10%)] hover:bg-[hsl(0,0%,15%)]"} rounded-l-md px-4 py-2 duration-300 shadow-sl`}
+>
+  EN
+</a>
+
+<a
+  href={translatedPath("es")}
+  class={`${currentLang === "es" ? "bg-[hsl(0,0%,15%)]" : "bg-[hsl(0,0%,10%)] hover:bg-[hsl(0,0%,15%)]"} rounded-r-md px-4 py-2 duration-300 shadow-sl`}
+>
+  ES
+</a>

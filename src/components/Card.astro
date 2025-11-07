@@ -1,0 +1,36 @@
+---
+const { img, icon, body, footer1, footer2, regular } = Astro.props;
+
+const hasImg = !!img;
+---
+
+<div
+  class="bg-[hsl(0,0%,10%)] hover:bg-[hsl(0,0%,15%)] h-auto w-76 p-8 rounded-3xl shadow-sl overflow-hidden transition-all duration-300 hover:-translate-y-2"
+>
+  {hasImg ? (
+    <img
+      class={`h-56 aspect-video object-cover shadow-l rounded-3xl ${regular ? "mb-4" : "mb-8"}`}
+      src={img}
+      alt="Card"
+    />
+  ) : (
+    <div
+      class={`flex items-center justify-center w-24 h-24 mx-auto rounded-full shadow-l bg-[hsl(0,0%,30%)] ${regular ? "mb-4" : "mb-8"}`}
+    >
+      <div class="icon text-[hsl(0,0%,90%)] text-4xl">
+        <i class={icon}></i>
+      </div>
+    </div>
+  )}
+  <div>
+    <h4
+      class={`text-[hsl(0,0%,90%)] ${regular ? "mb-2" : "mb-8"}`}
+    >
+      {body}
+    <h4/>
+    <div class="text-[hsl(0,0%,70%)]">
+      <p>{footer1}</p>
+      <p>{footer2}</p>
+    </div>
+  </div>
+</div>

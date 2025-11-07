@@ -1,0 +1,151 @@
+---
+import type { languages } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+import CardsContainer from "./CardsContainer.astro";
+import VideoContainer from "./VideoContainer.astro";
+
+const currentLang = Astro.currentLocale || "en";
+const t = useTranslations(currentLang as keyof typeof languages);
+
+const concerts = [
+  {
+    body: "Maldito Antisocial",
+    img: "https://cdn.myportfolio.com/652b25c3-c66e-4abb-a7c1-36ca2ad2ad92/e4dc6579-20de-40ed-88c0-9816e26304df_rw_1920.jpg?h=29697d3c2c0b321ee7007ceae245effd",
+    footer1: "Explanada Agua Dulce",
+    footer2: "17 de Octubre 2025",
+  },
+  {
+    body: "Big Time Rush",
+    img: "https://www.sportovnihalafortuna.cz/data/a/a/btr-1920x600-002-.jpg",
+    footer1: "Costa 21",
+    footer2: "27 de Febrero 2026",
+  },
+  {
+    body: "Cometa a la deriva",
+    img: "https://tercerparlante.com/wp-content/uploads/2025/01/Cometa-a-la-Deriva-Peru-2025-0001.jpg",
+    footer1: "Parque Washington",
+    footer2: "11 de Octubre 2025",
+  },
+  {
+    body: "Dua Lipa",
+    img: "https://images.hdqwalls.com/wallpapers/2019-dua-lipa-c0.jpg",
+    footer1: "Estadio San Marcos",
+    footer2: "25 de Noviembre 2025",
+  },
+  {
+    body: "Bad Bunny",
+    img: "https://media.pitchfork.com/photos/682b43f9d6a2575d172e91a4/16:9/w_1280,c_limit/Bad-Bunny-Debi-Tirar-Mas-Fotos.jpeg",
+    footer1: "Estadio Nacional",
+    footer2: "30 de Enero 2025",
+  },
+  {
+    body: "Doja Cat",
+    img: "https://4kwallpapers.com/images/wallpapers/doja-cat-american-3840x2160-9919.jpg",
+    footer1: "Arena 1",
+    footer2: "13 de Febrero 2026",
+  },
+];
+
+const testimonials = [
+  {
+    img: "https://raw.githubusercontent.com/The-Rumbling-AW/LandingV2/refs/heads/main/stay.jpg",
+    body: t("testuno"),
+    footer1: t("testunoby"),
+  },
+  {
+    img: "https://raw.githubusercontent.com/The-Rumbling-AW/LandingV2/refs/heads/main/harry.jpg",
+    body: t("testdos"),
+    footer1: t("testdosby"),
+  },
+  {
+    img: "https://raw.githubusercontent.com/The-Rumbling-AW/LandingV2/refs/heads/main/louis.jpg",
+    body: t("testtres"),
+    footer1: t("testtresby"),
+  },
+];
+---
+
+<div class="pt-18">
+  <div class="carousel-container mb-15">
+    <div class="carousel-wrapper" id="carousel-wrapper">
+      {
+        concerts.map((concert, index) => (
+          <div class="carousel-slide" data-index={index}>
+            <img src={concert.img} alt={concert.body} class="carousel-image" />
+            <div class="carousel-info">
+              <h3>{t("heroTitle1")}</h3>
+              <h3>{t("heroTitle2")}</h3>
+              <p>{t("heroSubtitle")}</p>
+              <a
+                href="/download"
+                class="bg-white py-4 px-6 text-black font-bold text-lg rounded-3xl hover:bg-zinc-100"
+              >
+                {t("ingresar")}
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="carousel-dots" id="carousel-dots">
+      {concerts.map((_, index) => <span class="dot" data-index={index} />)}
+    </div>
+  </div>
+
+  <CardsContainer cards={concerts} title={t("conoce")} regular={true} />
+  <CardsContainer cards={testimonials} title={t("Testimonios")} />
+  <VideoContainer
+    title={t("abouttheteam")}
+    videoSrc="https://www.youtube.com/embed/Fa3EgjYHyow"
+    body={t("abouttheteamdesc")}
+    reverted={true}
+  />
+  <VideoContainer
+    title={t("abouttheproduct")}
+    videoSrc="https://www.youtube.com/embed/Fa3EgjYHyow"
+    body={t("abouttheproductdesc")}
+  />
+  <div class="email-signup-section">
+    <div class="signup-circles">
+      {[1, 2, 3, 4].map((n) => <div class={`circle circle-${n}`} />)}
+    </div>
+    <div class="email-signup-content">
+      <h2>{t("footer")}</h2>
+      <p>{t("footerdos")}</p>
+      <form class="signup-form" onsubmit="event.preventDefault();">
+        <input type="email" placeholder={t("footercorreo")} required />
+        <button type="submit">{t("footerboton")}</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll<HTMLDivElement>(".carousel-slide");
+  const dots = document.querySelectorAll<HTMLSpanElement>(".dot");
+  let current = 0;
+
+  function showSlide(index: number) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === index);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      current = i;
+      showSlide(current);
+    });
+  });
+
+  setInterval(() => {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }, 5000);
+
+  showSlide(0);
+</script>
