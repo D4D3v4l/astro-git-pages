@@ -1,21 +1,23 @@
 ---
-const { img, icon, body, footer1, footer2, regular, bodyCentered = false, px = 8 } = Astro.props;
+const { img, icon, body, footer, variant } = Astro.props;
 
 const hasImg = !!img;
+
+//VARIANT: "CONCERT" | "BENEFIT" | "TESTIMONIAL"
 ---
 
 <div
-  class=`bg-[hsl(0,0%,10%)] hover:bg-[hsl(0,0%,15%)] h-auto w-76 py-8 px-${px} rounded-3xl shadow-sl overflow-hidden transition-all duration-300 hover:-translate-y-2`
+  class=`bg-[hsl(0,0%,10%)] hover:bg-[hsl(0,0%,15%)] h-auto w-76 ${variant === "BENEFIT" ? "py-8 px-4" : "p-8"} rounded-3xl shadow-sl overflow-hidden transition-all duration-300 hover:-translate-y-2`
 >
   {hasImg ? (
     <img
-      class={`h-56 aspect-video object-cover shadow-l rounded-3xl ${regular ? "mb-4" : "mb-8"}`}
+      class={`h-56 aspect-video object-cover shadow-l rounded-3xl ${variant === "TESTIMONIAL" ? "mb-8" : "mb-4"}`}
       src={img}
       alt="Card"
     />
   ) : (
     <div
-      class={`flex items-center justify-center w-24 h-24 mx-auto rounded-full shadow-l bg-[hsl(0,0%,30%)] ${regular ? "mb-4" : "mb-8"}`}
+      class={`flex items-center justify-center w-24 h-24 mx-auto rounded-full shadow-l bg-[hsl(0,0%,30%)] ${variant === "TESTIMONIAL" ? "mb-4" : "mb-8"}`}
     >
       <div class="icon text-[hsl(0,0%,90%)] text-4xl">
         <i class={icon}></i>
@@ -23,10 +25,7 @@ const hasImg = !!img;
     </div>
   )}
   <div>
-    <h4 class={`text-[hsl(0,0%,90%)] ${bodyCentered ? "text-center": ""} ${regular ? "mb-2" : "mb-8"}`} set:html={body} />
-    <div class="text-[hsl(0,0%,70%)]">
-      <p>{footer1}</p>
-      <p>{footer2}</p>
-    </div>
+    <h4 class={`text-[hsl(0,0%,90%)] ${variant === "BENEFIT" ? "text-center": ""} ${variant === "TESTIMONIAL" ? "mb-8" : "mb-2"}`} set:html={body} />
+    <p class="text-[hsl(0,0%,70%)]" set:html={footer} />
   </div>
 </div>

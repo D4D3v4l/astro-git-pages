@@ -3,7 +3,7 @@ import Card from "./Card.astro";
 import SectionDivider from "./SectionDivider.astro";
 import SectionTitle from "./SectionTitle.astro";
 
-const { title, cards, regular = false, cols = 3, cardsBody = "start" , cardsPx = 8 } = Astro.props;
+const { title, cards, cols = 3, variant = "CONCERT" } = Astro.props;
 ---
 {cols !== 2 && (
   <SectionDivider />
@@ -25,11 +25,8 @@ const { title, cards, regular = false, cols = 3, cardsBody = "start" , cardsPx =
             img={card.img}
             icon={card.icon}
             body={card.body}
-            footer1={card.footer1}
-            footer2={card.footer2}
-            regular={regular}
-            bodyCentered={cardsBody === "start" ? false : true}
-            px={cardsPx}
+            footer={card.footer}
+            variant={variant}
           />
         ))
       }
