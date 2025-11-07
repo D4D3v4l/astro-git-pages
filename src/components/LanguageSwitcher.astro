@@ -1,9 +1,20 @@
 ---
+const base = import.meta.env.BASE_URL || "/";
 const pathname = Astro.url.pathname;
-const currentLang = pathname.startsWith("/es") ? "es" : "en";
+
+const currentLang = pathname.startsWith(`${base}/es`) ? "es" : "en";
+
+const pathWithoutLang =
+  currentLang === "es"
+    ? pathname.replace(`${base}/es`, "")
+    : pathname.replace(base, "");
 
 function translatedPath(lang: string) {
-  return lang === "en" ? "/en" : "/es";
+  if (lang === "en") {
+    return `${base}${pathWithoutLang}`;
+  } else {
+    return `${base}/es${pathWithoutLang}`;
+  }
 }
 ---
 
