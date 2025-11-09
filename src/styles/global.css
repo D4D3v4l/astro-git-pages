@@ -2,6 +2,16 @@
 @import "tailwindcss";
 
 :root {
+  /* COLORS */
+  --primary: hsl(351 72% 31%);
+  --bg-dark: oklch(0.1 0 264);
+  --bg: oklch(0.2 0 264);
+  --bg-light: oklch(0.3 0 264);
+  --bg-lighter: oklch(0.4 0 264);
+  --text: oklch(0.96 0 264);
+  --text-muted: oklch(0.76 0 264);
+
+  /* TYPOGRAPHY */
   --ff: "Inter", sans-serif;
   --h1: bold 4rem/1em var(--ff);
   --h2: bold 3rem/1.2em var(--ff);
@@ -11,17 +21,26 @@
   --p: 1rem/1.6em var(--ff);
   --small: 0.75rem/2em var(--ff);
 }
+:root.light {
+  --primary: hsl(351 72% 41%);
+  --bg-dark: oklch(0.88 0 264);
+  --bg: oklch(0.92 0 264);
+  --bg-light: oklch(0.96 0 264);
+  --bg-lighter: oklch(1 0 264);
+  --text: oklch(0.15 0 264);
+  --text-muted: oklch(0.4 0 264);
+}
 body {
   margin: 0;
   font-family: var(--ff);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: hsl(0, 0%, 0%);
+  background-color: var(--bg-dark);
   color: #fff;
   overflow-x: hidden;
 }
 h1 {
-  font: var(--h2);  
+  font: var(--h2);
 }
 @media (min-width: 768px) {
   h1 {
@@ -768,6 +787,7 @@ nav a.active {
 .shadow-sl {
   box-shadow: var(--shadow-s);
 }
-.shadow-sl:hover {
+.shadow-sl:hover,
+.shadow-sl.active {
   box-shadow: var(--shadow-l);
 }

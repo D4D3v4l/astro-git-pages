@@ -3,9 +3,10 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import type { languages } from "../i18n/ui";
 import { useTranslations } from "../i18n/utils";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+import ThemeSwitcher from "./ThemeSwitcher.astro";
 
 const currentLang = Astro.currentLocale || "en";
-const t = useTranslations(currentLang as keyof typeof languages)
+const t = useTranslations(currentLang as keyof typeof languages);
 
 const items = [
   { label: "inicio" as const, to: "/" },
@@ -15,9 +16,7 @@ const items = [
 ];
 ---
 
-<nav
-  class="fixed flex w-full justify-center p-2 bg-[#000000] z-50 text-white"
->
+<nav class="fixed flex w-full justify-center p-2 bg-(--bg-dark) z-50 text-(--text)">
   <div class="flex w-full items-center justify-between max-w-280">
     <img src="/astro-git-pages/logo.webp" alt="GigMap Logo" class="w-14 h-14" />
     <div class="flex items-center">
@@ -30,7 +29,7 @@ const items = [
             <li class="py-2 md:py-0">
               <a
                 href={getRelativeLocaleUrl(currentLang, item.to)}
-                class="mx-6 font-bold hover:text-[#8c1c25] active:text-[#8c1c25] duration-300"
+                class="mx-6 font-bold hover:text-(--primary) active:text-(--primary) duration-300"
               >
                 {t(item.label)}
               </a>
@@ -39,27 +38,30 @@ const items = [
         }
       </ul>
       <div class="ml-6 mr-12 hidden md:block">|</div>
-      <LanguageSwitcher />
-      <div class="md:mr-12 mr-6"></div>
-      <button id="menu-btn" class="md:hidden focus:outline-none">
-        <svg
-          class="md:hidden"
-          xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-          <path d="M4 6l16 0"></path>
-          <path d="M4 12l16 0"></path>
-          <path d="M4 18l16 0"></path>
-        </svg>
-      </button>
+      <div class="flex items-center gap-3 md:gap-6">
+        <LanguageSwitcher />
+        <ThemeSwitcher />
+        <div class="md:mr-12 mr-6"></div>
+        <button id="menu-btn" class="md:hidden focus:outline-none">
+          <svg
+            class="md:hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M4 6l16 0"></path>
+            <path d="M4 12l16 0"></path>
+            <path d="M4 18l16 0"></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 </nav>
