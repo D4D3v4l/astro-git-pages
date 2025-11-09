@@ -9,11 +9,11 @@ const { videoSrc, title, body, reverted = false } = Astro.props;
 <section class="px-5">
   <SectionTitle title={title} />
   <div
-    class={`video-section flex flex-col md:flex-row items-center justify-center gap-8 ${
-      reverted ? "md:flex-row" : "md:flex-row-reverse"
+    class={`video-section flex flex-col items-center justify-center gap-7.5 ${
+      reverted ? "xl:flex-row" : "xl:flex-row-reverse"
     }`}
   >
-    <div class="video-media w-full md:w-1/2">
+    <div class="video-media w-full xl:w-1/2">
       <iframe
         src={videoSrc}
         class="w-full aspect-video rounded-xl shadow-lg"
@@ -21,8 +21,10 @@ const { videoSrc, title, body, reverted = false } = Astro.props;
         allowfullscreen></iframe>
     </div>
 
-    <div class="video-content w-full md:w-1/2 text-center md:text-left">
-      <p>{body}</p>
+    <div
+      class=`bg-(--bg) w-full xl:w-1/2 text-center xl:text-left p-8 rounded-3xl shadow-s overflow-hidden`
+    >
+      <h4 class="text-(--text)" set:html={body} />
     </div>
   </div>
 </section>

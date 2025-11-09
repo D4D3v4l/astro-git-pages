@@ -1,14 +1,15 @@
 ---
-const { img, icon, body, footer, variant } = Astro.props;
+const { img, icon, body, footer, btn, variant } = Astro.props;
 
 const hasImg = !!img;
 const hasIcon = !!icon;
+const hasBtn = !!btn;
 
-//VARIANT: "CONCERT" | "BENEFIT" | "TESTIMONIAL"
+//VARIANT: "CONCERT" | "BENEFIT" | "TESTIMONIAL" | "DOWNLOAD"
 ---
 
 <div
-  class=`bg-(--bg) hover:bg-(--bg-light) w-76 ${variant === "BENEFIT" ? "py-8 px-4" : "p-8"} rounded-3xl shadow-sl overflow-hidden transition-all duration-300 hover:-translate-y-2`
+  class=`bg-(--bg) hover:bg-(--bg-light) w-71 sm:w-75 ${variant === "BENEFIT" ? "py-8 px-4" : "p-8"} rounded-3xl shadow-sl overflow-hidden transition-all duration-300 hover:-translate-y-2 ${variant === "DOWNLOAD" && "text-center"}`
 >
   {
     hasImg && (
@@ -35,6 +36,7 @@ const hasIcon = !!icon;
       class={`text-(--text) ${variant === "BENEFIT" ? "text-center" : ""} ${variant === "TESTIMONIAL" ? "mb-8" : "mb-2"}`}
       set:html={body}
     />
+    {hasBtn && <div class="mt-10" set:html={btn} />}
     <p class="text-(--text-muted)" set:html={footer} />
   </div>
 </div>

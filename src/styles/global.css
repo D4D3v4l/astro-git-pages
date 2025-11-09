@@ -4,6 +4,7 @@
 :root {
   /* COLORS */
   --primary: hsl(351 72% 31%);
+  --primary-95: hsl(351 72% 36%);
   --bg-dark: oklch(0.1 0 264);
   --bg: oklch(0.2 0 264);
   --bg-light: oklch(0.3 0 264);
@@ -22,7 +23,6 @@
   --small: 0.75rem/2em var(--ff);
 }
 :root.light {
-  --primary: hsl(351 72% 41%);
   --bg-dark: oklch(0.88 0 264);
   --bg: oklch(0.92 0 264);
   --bg-light: oklch(0.96 0 264);
@@ -38,6 +38,59 @@ body {
   background-color: var(--bg-dark);
   color: #fff;
   overflow-x: hidden;
+}
+.title {
+  font: var(--h4);
+  transition-duration: 300ms;
+
+  @media (width >= 480px) {
+    font: var(--h3);
+  }
+  @media (width >= 710px) {
+    font: var(--h2);
+  }
+  @media (width >= 980px) {
+    font: var(--h1);
+  }
+}
+
+.btn-s {
+  font: bold var(--big);
+  border-radius: 2rem;
+  padding: 0.75rem 1.5rem;
+  transition-property: all;
+  transition-duration: 300ms;
+}
+.btn-l {
+  font: var(--h4);
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  transition-property: all;
+  transition-duration: 300ms;
+}
+.btn-sl {
+  font: bold var(--big);
+  border-radius: 2rem;
+  padding: 0.75rem 1.5rem;
+  transition-property: all;
+  transition-duration: 300ms;
+}
+.hero {
+  font: var(--h4);
+}
+@media ((min-height: 840px) and (min-width: 768px)) {
+  .hero {
+    font: var(--h2);
+  }
+}
+@media (min-width: 768px) {
+  .btn-sl {
+    font: var(--h4);
+    border-radius: 2rem;
+    padding: 1rem 2rem;
+    transition-property: all;
+    transition-duration: 300ms;
+  }
 }
 h1 {
   font: var(--h2);
@@ -56,11 +109,17 @@ h3 {
 h4 {
   font: var(--h4);
 }
+p {
+  font: var(--p);
+}
+.p-bold {
+  font: bold var(--p);
+}
 .big {
   font: var(--big);
 }
-p {
-  font: var(--p);
+.link {
+  font: bold var(--p);
 }
 .small {
   font: var(--small);
@@ -186,23 +245,6 @@ p {
   z-index: 2;
   width: 90%;
   max-width: 900px;
-}
-
-.carousel-info h3 {
-  font-size: 4rem;
-  margin: 0 0 1rem 0;
-  font-weight: 800;
-  color: #fff;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  line-height: 1.2;
-}
-
-.carousel-info p {
-  margin: 0 0 2rem 0;
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Minimalist carousel dots */
@@ -409,9 +451,7 @@ p {
 /* New purple email signup section before footer */
 .email-signup-section {
   background: linear-gradient(135deg, #8c1c25 0%, #590e0e 100%);
-  padding: 4rem 3rem;
   text-align: center;
-  margin-top: 4rem;
   position: relative;
   overflow: hidden;
 }
@@ -427,59 +467,43 @@ p {
 }
 
 .email-signup-content {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
 }
 
-.email-signup-content h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-.email-signup-content p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  color: rgba(255, 255, 255, 0.95);
-  line-height: 1.6;
-}
-
 .signup-form {
   display: flex;
-  gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .signup-form input[type="email"] {
-  padding: 1rem 1.5rem;
+  background-color: hsl(0, 0%, 90%);
+  color: hsl(0, 0%, 5%);
   border: none;
   border-radius: 30px;
   width: 320px;
-  font-size: 1rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-s);
 }
 
 .signup-form button {
   padding: 1rem 2.5rem;
-  background-color: #fff;
-  color: #8c1c25;
+  color: hsl(0, 0%, 5%);
+  background-color: hsl(0, 0%, 90%);
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  font-weight: 700;
-  font-size: 1rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-s);
 }
 
 .signup-form button:hover {
-  background-color: #f5f5f5;
+  background-color: hsl(0, 0%, 95%);
+  color: hsl(351 72% 31%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-l);
 }
 
 /* Decorative circles for email section */

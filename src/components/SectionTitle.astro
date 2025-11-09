@@ -4,7 +4,7 @@ const { title, subtitle } = Astro.props;
 const hasSubtitle: boolean = !!subtitle;
 ---
 
-<div class="mb-15 md:mb-30 text-center">
-  <h1 class="h1 transition-all duration-300 text-(--text)" set:html={title} />
+<div class="px-4 mb-15 md:mb-30 text-center">
+  <a class="title text-(--text)" set:html={title} />
   {hasSubtitle && <p class="mt-7.5 big text-(--text-muted) transition-all duration-300" set:html={subtitle} />}
 </div>

@@ -1,6 +1,7 @@
 ---
-import type { languages } from '../i18n/ui';
-import { useTranslations } from '../i18n/utils';
+import { getRelativeLocaleUrl } from "astro:i18n";
+import type { languages } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
 import CardsContainer from "./CardsContainer.astro";
 import VideoContainer from "./VideoContainer.astro";
 
@@ -66,13 +67,14 @@ const testimonials = [
         concerts.map((concert, index) => (
           <div class="carousel-slide" data-index={index}>
             <img src={concert.img} alt={concert.body} class="carousel-image" />
-            <div class="carousel-info">
-              <h3>{t("heroTitle1")}</h3>
-              <h3>{t("heroTitle2")}</h3>
-              <p>{t("heroSubtitle")}</p>
+            <div
+              class="px-10 pb-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+            text-center text-white z-20 w-full max-w-[1200px]"
+            >
+              <p class="title mb-8 md:mb-16">{t("heroSubtitle")}</p>
               <a
-                href="/download"
-                class="bg-white py-4 px-6 text-black font-bold text-lg rounded-3xl hover:bg-zinc-100"
+                class="btn-sl bg-[hsl(0,0%,95%)] hover:bg-[hsl(0,0%,85%)] text-[hsl(0,0%,5%)]"
+                href={getRelativeLocaleUrl(currentLang, "/download")}
               >
                 {t("ingresar")}
               </a>
@@ -88,7 +90,11 @@ const testimonials = [
   </div>
 
   <CardsContainer cards={concerts} title={t("conoce")} />
-  <CardsContainer cards={testimonials} title={t("Testimonios")} variant="TESTIMONIAL" />
+  <CardsContainer
+    cards={testimonials}
+    title={t("Testimonios")}
+    variant="TESTIMONIAL"
+  />
   <VideoContainer
     title={t("abouttheteam")}
     videoSrc="https://www.youtube.com/embed/Fa3EgjYHyow"
@@ -100,16 +106,21 @@ const testimonials = [
     videoSrc="https://www.youtube.com/embed/Fa3EgjYHyow"
     body={t("abouttheproductdesc")}
   />
-  <div class="email-signup-section">
+  <div class="email-signup-section py-15 px-5 sm:px-10">
     <div class="signup-circles">
       {[1, 2, 3, 4].map((n) => <div class={`circle circle-${n}`} />)}
     </div>
     <div class="email-signup-content">
-      <h2>{t("footer")}</h2>
-      <p>{t("footerdos")}</p>
-      <form class="signup-form" onsubmit="event.preventDefault();">
-        <input type="email" placeholder={t("footercorreo")} required />
-        <button type="submit">{t("footerboton")}</button>
+      <h2 class="mb-4">{t("footer")}</h2>
+      <p class="big mb-8 md:16 text-[hsl(0,0%,70%)]">{t("footerdos")}</p>
+      <form class="signup-form gap-8" onsubmit="event.preventDefault();">
+        <input
+          class="p-4"
+          type="email"
+          placeholder={t("footercorreo")}
+          required
+        />
+        <button class="p-bold" type="submit">{t("footerboton")}</button>
       </form>
     </div>
   </div>
